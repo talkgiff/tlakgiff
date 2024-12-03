@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz de Sinal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        img {
+            width: 100%;
+            max-width: 500px;
+            margin-top: 20px;
+        }
+        .container {
+            padding: 20px;
+        }
+        .pergunta {
+            font-size: 24px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        .botao {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 15px 30px;
+            margin: 10px;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .botao:hover {
+            background-color: #0056b3;
+        }
+        .mensagem {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+            display: none;
+        }
+        .mensagem.correta {
+            color: green;
+        }
+        .mensagem.errada {
+            color: red;
+        }
+        .pergunta-nova {
+            margin-top: 20px;
+        }
+        .nova-imagem {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Primeira imagem e pergunta -->
+        <img src="https://i.imgur.com/IRrjhPm.png" alt="Imagem do Sinal">
+        <div class="pergunta">Que sinal é esse?</div>
+        
+        <button class="botao" onclick="verificarResposta(1)">Mãos</button>
+        <button class="botao" onclick="verificarResposta(2)">Habilidade</button>
+        <button class="botao" onclick="verificarResposta(3)">Talkgiff</button>
+        <button class="botao" onclick="verificarResposta(4)">Poder</button>
+
+        <div id="mensagem" class="mensagem"></div>
+        <div id="nova-pergunta" class="pergunta-nova" style="display: none;">
+            <!-- Nova pergunta e imagem aparecerão aqui -->
+            <img src="https://i.imgur.com/AhTlLtW.png" alt="Nova Imagem" class="nova-imagem">
+            <div class="pergunta">Que sinal é esse?</div>
+            <button class="botao" onclick="verificarRespostaNova(1)">Tristeza</button>
+            <button class="botao" onclick="verificarRespostaNova(2)">Saudade</button>
+            <button class="botao" onclick="verificarRespostaNova(3)">Dor</button>
+            <button class="botao" onclick="verificarRespostaNova(4)">Angústia</button>
+        </div>
+    </div>
+
+    <script>
+        function verificarResposta(opcao) {
+            const mensagem = document.getElementById('mensagem');
+            if (opcao === 3) {
+                mensagem.textContent = "Parabéns, você está progredindo, continue treinando conosco";
+                mensagem.classList.remove('errada');
+                mensagem.classList.add('correta');
+                mensagem.style.display = 'block';
+
+                // Mostrar nova pergunta após resposta correta
+                setTimeout(function() {
+                    // Ocultar a primeira pergunta
+                    document.querySelector('.container').style.display = 'none';
+                    // Mostrar a nova pergunta
+                    document.getElementById('nova-pergunta').style.display = 'block';
+                }, 2000); // Espera 2 segundos antes de mostrar a próxima pergunta
+            } else {
+                mensagem.textContent = "Que pena, você errou, tente de novo";
+                mensagem.classList.remove('correta');
+                mensagem.classList.add('errada');
+                mensagem.style.display = 'block';
+            }
+        }
+
+        function verificarRespostaNova(opcao) {
+            const mensagem = document.getElementById('mensagem');
+            if (opcao === 2) {
+                mensagem.textContent = "Parabéns, você está progredindo, continue treinando conosco";
+                mensagem.classList.remove('errada');
+                mensagem.classList.add('correta');
+            } else {
+                mensagem.textContent = "Que pena, você errou, tente de novo";
+                mensagem.classList.remove('correta');
+                mensagem.classList.add('errada');
+            }
+            mensagem.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
